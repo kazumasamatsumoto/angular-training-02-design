@@ -1,0 +1,24 @@
+<article class="card">
+  <header class="card-head">
+    <span class="card-no">No.{{ pokemon().id }}</span>
+    <button
+      type="button"
+      class="card-star"
+      [class.on]="favorite()"
+      (click)="favoriteToggle.emit(pokemon().id)"
+    >
+      ★
+    </button>
+  </header>
+
+  <img class="card-img" [src]="imageUrl()" [alt]="pokemon().ja" loading="lazy" width="120" height="120" />
+
+  <h2 class="card-name">{{ pokemon().ja }}</h2>
+  <p class="card-sub">{{ pokemon().en }}</p>
+
+  <div class="card-types">
+    @for (t of pokemon().types; track t) {
+      <span class="card-type">{{ t }}</span>
+    }
+  </div>
+</article>

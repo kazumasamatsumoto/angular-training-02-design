@@ -1,0 +1,21 @@
+<header class="header">
+  <h1>ポケモン図鑑ミニ(設計編)</h1>
+</header>
+
+<main class="main">
+  <app-search-box (queryChange)="query.set($event)" />
+
+  <p class="meta">{{ filtered().length }} 匹</p>
+
+  <div class="grid">
+    @for (p of filtered(); track p.id) {
+      <app-pokemon-card
+        [pokemon]="p"
+        [favorite]="favoriteIds().has(p.id)"
+        (favoriteToggle)="toggleFavorite($event)"
+      />
+    } @empty {
+      <p class="empty">見つかりませんでした</p>
+    }
+  </div>
+</main>

@@ -4,6 +4,8 @@
 
 **このリポジトリの使い方:** clone して手元で動かしながら進めます。前半は完成済みのコードを読んで設計を逆算し、後半は**新機能を自分で設計してから**実装します。
 
+**パート1時点のデモ:** https://angular-training-02-design.vercel.app
+
 ```bash
 git clone <このリポジトリのURL>
 cd angular-training-02-design

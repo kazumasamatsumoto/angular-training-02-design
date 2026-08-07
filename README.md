@@ -6,6 +6,10 @@
 
 **パート1時点のデモ:** https://angular-training-02-design.vercel.app
 
+![設計の流れ](docs/design-flow.png)
+
+> 図の原本は [docs/design-flow.drawio](docs/design-flow.drawio)([draw.io](https://app.diagrams.net) で編集可)
+
 ```bash
 git clone <このリポジトリのURL>
 cd angular-training-02-design

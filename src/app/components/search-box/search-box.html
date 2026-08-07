@@ -1,6 +1,12 @@
-<input
-  class="search"
-  type="search"
-  placeholder="なまえで検索(例: ピカ / pika)"
-  (input)="onInput($event)"
-/>
+<div class="wrap">
+  <input
+    class="search"
+    type="search"
+    placeholder="なまえで検索(例: ピカ / pika)"
+    [value]="value()"
+    (input)="onInput($event)"
+  />
+  @if (value()) {
+    <button type="button" class="clear" (click)="clear()">×</button>
+  }
+</div>

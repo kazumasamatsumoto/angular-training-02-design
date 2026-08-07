@@ -1,21 +1,53 @@
 <header class="header">
   <h1>ポケモン図鑑ミニ(設計編)</h1>
+  <span class="fav-count">★ {{ favCount() }}</span>
 </header>
 
 <main class="main">
   <app-search-box (queryChange)="query.set($event)" />
 
+  <div class="controls">
+    <button
+      type="button"
+      class="fav-filter"
+      [class.on]="favOnly()"
+      (click)="favOnly.set(!favOnly())"
+    >
+      ★ お気に入りのみ
+    </button>
+    <app-sort-select (sortChange)="sortKey.set($event)" />
+  </div>
+
+  <div class="type-filter">
+    @for (t of allTypes(); track t) {
+      <button
+        type="button"
+        class="type-btn"
+        [class.on]="selectedType() === t"
+        (click)="selectType(t)"
+      >
+        {{ t }}
+      </button>
+    }
+  </div>
+
   <p class="meta">{{ filtered().length }} 匹</p>
 
   <div class="grid">
     @for (p of filtered(); track p.id) {
-      <app-pokemon-card
-        [pokemon]="p"
-        [favorite]="favoriteIds().has(p.id)"
-        (favoriteToggle)="toggleFavorite($event)"
-      />
+      <div (click)="selected.set(p)">
+        <app-pokemon-card
+          [pokemon]="p"
+          [favorite]="favoriteIds().has(p.id)"
+          (favoriteToggle)="toggleFavorite($event)"
+        />
+      </div>
     } @empty {
       <p class="empty">見つかりませんでした</p>
     }
   </div>
 </main>
+
+@if (selected(); as p) {
+  <app-pokemon-modal [pokemon]="p" (closed)="selected.set(null)" />
+}

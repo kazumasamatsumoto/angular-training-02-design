@@ -1,0 +1,9 @@
+<div class="backdrop" (click)="closed.emit()">
+  <div class="dialog" (click)="$event.stopPropagation()">
+    <button type="button" class="close" (click)="closed.emit()">×</button>
+    <img [src]="imageUrl()" [alt]="pokemon().ja" width="200" height="200" />
+    <h2>{{ pokemon().ja }}</h2>
+    <p>{{ pokemon().en }} / No.{{ pokemon().id }}</p>
+    <p>タイプ: {{ pokemon().types.join('・') }}</p>
+  </div>
+</div>

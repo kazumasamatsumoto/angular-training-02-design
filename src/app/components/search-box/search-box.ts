@@ -1,9 +1,9 @@
-import { Component, output } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 /**
  * 検索ボックス部品。
  * 契約: 確定した検索語を queryChange で通知するだけ。
- * 「何を検索するか」「どう絞り込むか」はこの部品は知らない(親の仕事)。
+ * クリアボタンは「空文字が確定した」として同じ契約で通知する(親の修正ゼロ)。
  */
 @Component({
   selector: 'app-search-box',
@@ -14,7 +14,15 @@ import { Component, output } from '@angular/core';
 export class SearchBox {
   queryChange = output<string>();
 
+  readonly value = signal('');
+
   onInput(event: Event): void {
-    this.queryChange.emit((event.target as HTMLInputElement).value);
+    this.value.set((event.target as HTMLInputElement).value);
+    this.queryChange.emit(this.value());
+  }
+
+  clear(): void {
+    this.value.set('');
+    this.queryChange.emit('');
   }
 }
